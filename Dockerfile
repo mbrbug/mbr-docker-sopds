@@ -12,7 +12,7 @@ ENV DB_USER=sopds \
     SOPDS_INPX_ENABLE=True \
     SOPDS_LANGUAGE=ru-RU \
     MIGRATE=False \
-    VERSION=0.46
+    VERSION=0.47
 
 #ADD ./sopds-zip/sopds.zip /sopds.zip
 ADD ./scripts/start.sh /start.sh
