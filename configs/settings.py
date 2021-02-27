@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sopds',
-        'HOST': '192.168.1.11',
+        'HOST': '192.168.111.2',
         'USER': 'sopds',
         'PASSWORD' : 'sopds',
         'OPTIONS' : {
@@ -169,7 +169,7 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 
 CONSTANCE_CONFIG = OrderedDict([
     ('SOPDS_LANGUAGE', ('en-US',_('Select language'),'language_select')),    
-    ('SOPDS_ROOT_LIB', ('books/',_('Absolute path to books collection directory'))),
+    ('SOPDS_ROOT_LIB', ('/mnt/books/',_('Absolute path to books collection directory'))),
     ('SOPDS_BOOK_EXTENSIONS', ('.pdf .djvu .fb2 .epub .mobi', _('List of managed book files extensions'))),
     ('SOPDS_SCAN_START_DIRECTLY', (False,_('Turn once scanning directly'))),
     ('SOPDS_CACHE_TIME', (1200, _('Pages cache time'))),
