@@ -34,6 +34,7 @@
 #fi
 #python3 manage.py sopds_server start & python3 manage.py sopds_scanner start
 
-[[ ! -f /sopds/manage.py ]]&& cp -r /sopds-master/* /sopds
-[[ ! -d /sopds/sopds/__pycache__ ]] && python3 manage.py migrate
+#[[ ! -f /sopds/manage.py ]]&& cp -r /sopds-master/* /sopds
+#[[ ! -d /sopds/sopds/__pycache__ ]] && python3 manage.py migrate
+cd /sopds
 python3 manage.py sopds_server start & python3 manage.py sopds_scanner start
