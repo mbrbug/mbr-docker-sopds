@@ -19,8 +19,8 @@ ENV DB_USER=sopds \
 # ADD https://github.com/mitshel/sopds/archive/v0.48-devel.zip /sopds.zip
 # RUN unzip sopds.zip && rm sopds.zip && mv sopds-* sopds
 # ADD ./configs/settings.py /sopds/sopds/settings.py
-RUN apk add git openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev openjpeg-dev tiff-dev vim mariadb-dev tzdata \
-&& git clone https://github.com/PeterVoronov/sopds.git
+RUN apk add git curl openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev openjpeg-dev tiff-dev vim mariadb-dev tzdata \
+&& git clone https://github.com/mbrbug/sopds.git
 WORKDIR /sopds
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt \
 && pip3 install mysqlclient
@@ -38,5 +38,8 @@ RUN chmod +x /start.sh
 VOLUME /usr/src/sopds/opds_catalog/log
 VOLUME /usr/src/sopds/opds_catalog/tmp
 EXPOSE 8001
+
+HEALTHCHECK --start-period=5s --interval=30s --retries=1 --timeout=5s \
+CMD curl --fail http://localhost:8001 || exit 1
 
 ENTRYPOINT ["/start.sh"]
