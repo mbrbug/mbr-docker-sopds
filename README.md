@@ -10,7 +10,7 @@ http://www.sopds.ru
 build the image yourself.
 
 ```
-docker build -t mbr/sopds https://github.com/mbrbug/mbr-docker-sopds.git
+docker build -t mbr/sopds .
 ```
 
 # Quick Start
