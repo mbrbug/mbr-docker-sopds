@@ -35,8 +35,8 @@ ADD ./scripts/start.sh /start.sh
 # ADD ./file/libmysqld.so /usr/lib/libmysqld.so
 RUN chmod +x /start.sh
 
-VOLUME /usr/src/sopds/opds_catalog/log
-VOLUME /usr/src/sopds/opds_catalog/tmp
+# VOLUME /usr/src/sopds/opds_catalog/log
+# VOLUME /usr/src/sopds/opds_catalog/tmp
 EXPOSE 8001
 
 HEALTHCHECK --start-period=5s --interval=30s --retries=1 --timeout=5s \
