@@ -40,6 +40,6 @@ RUN chmod +x /start.sh
 EXPOSE 8001
 
 HEALTHCHECK --start-period=5s --interval=30s --retries=1 --timeout=5s \
-CMD curl --fail http://localhost:8001 || exit 1
+CMD curl --fail http://localhost:8001 || sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
 ENTRYPOINT ["/start.sh"]
