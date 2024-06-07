@@ -19,8 +19,8 @@ ENV DB_USER=sopds \
 # ADD https://github.com/mitshel/sopds/archive/v0.48-devel.zip /sopds.zip
 # RUN unzip sopds.zip && rm sopds.zip && mv sopds-* sopds
 # ADD ./configs/settings.py /sopds/sopds/settings.py
-RUN apk add git curl openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev openjpeg-dev tiff-dev vim mariadb-dev tzdata \
-&& git clone https://github.com/mbrbug/mbr-docker-sopds.git sopds
+RUN apk add git zsh mc curl openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev openjpeg-dev tiff-dev vim mariadb-dev tzdata \
+&& git clone -b fix-templates https://github.com/mbrbug/mbr-docker-sopds.git sopds
 WORKDIR /sopds
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt \
 && pip3 install mysqlclient
