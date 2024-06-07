@@ -25,8 +25,8 @@ WORKDIR /sopds
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt \
 && pip3 install mysqlclient
 # RUN pip3 install --upgrade pip && pip3 install -r requirements.txt && pip3 install mysqlclient
-RUN rm -rf /sopds/convert/fb2conv && mkdir -p /sopds/convert/fb2conv/ && cd /sopds/convert/fb2conv/ \
-&& get https://github.com/rupor-github/fb2mobi/releases/download/3.6.67/fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
+RUN rm -rf /sopds/convert/fb2conv && mkdir -p /sopds/convert/fb2conv && cd /sopds/convert/fb2conv \
+&& wget https://github.com/rupor-github/fb2mobi/releases/download/3.6.67/fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
 && tar -xvf fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz && rm fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
 && curl -fsSL --retry 3 -o /etc/apk/keys/sgerrand.rsa.pub https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r4/sgerrand.rsa.pub \
 && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r4/glibc-2.23-r4.apk \
