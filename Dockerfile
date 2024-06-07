@@ -1,5 +1,5 @@
 FROM python:3.8.6-alpine
-MAINTAINER am@homembr.ru
+MAINTAINER am@ambr.cc
 
 ENV DB_USER=sopds \
     DB_NAME=sopds \
@@ -20,11 +20,20 @@ ENV DB_USER=sopds \
 # RUN unzip sopds.zip && rm sopds.zip && mv sopds-* sopds
 # ADD ./configs/settings.py /sopds/sopds/settings.py
 RUN apk add git zsh mc curl openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev openjpeg-dev tiff-dev vim mariadb-dev tzdata \
-&& git clone -b fix-templates https://github.com/mbrbug/mbr-docker-sopds.git sopds
+&& git clone -b mobiconv https://github.com/mbrbug/mbr-docker-sopds.git sopds
 WORKDIR /sopds
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt \
 && pip3 install mysqlclient
 # RUN pip3 install --upgrade pip && pip3 install -r requirements.txt && pip3 install mysqlclient
+RUN rm -rf /sopds/convert/fb2conv && mkdir -p /sopds/convert/fb2conv/ && cd /sopds/convert/fb2conv/ \
+&& get https://github.com/rupor-github/fb2mobi/releases/download/3.6.67/fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
+&& tar -xvf fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz && rm fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
+&& curl -fsSL --retry 3 -o /etc/apk/keys/sgerrand.rsa.pub https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r4/sgerrand.rsa.pub \
+&& wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r4/glibc-2.23-r4.apk \
+&& apk add glibc-2.23-r4.apk \
+&& cp /usr/lib/libexpat.so.1 /sopds/convert/fb2conv/libexpat.so.1 \
+&& cp /lib/libz.so.1 /sopds/convert/fb2conv/libz.so.1 \
+&& cp /lib/libc.musl-x86_64.so.1 /sopds/convert/fb2conv/libc.musl-x86_64.so.1
 RUN apk del gcc openssh git
 #RUN apk del mariadb-dev
 ADD ./scripts/start.sh /start.sh
