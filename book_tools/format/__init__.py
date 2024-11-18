@@ -21,7 +21,7 @@ class mime_detector:
         if fmt.lower() == 'xml':
             return Mimetype.XML
         elif fmt.lower() == 'fb2':
-            return Mimetype.FB2
+            return Mimetype.FB2_ZIP
         elif fmt.lower() =='epub':
             return Mimetype.EPUB
         elif fmt.lower() =='mobi':
@@ -53,7 +53,7 @@ def detect_mime(file, original_filename):
     try:
         if mime == Mimetype.XML:
             if FB2_ROOT == __xml_root_tag(file):
-                return Mimetype.FB2
+                return Mimetype.FB2_ZIP
         elif mime == Mimetype.ZIP:
             with zipfile.ZipFile(file) as zip_file:
                 if not zip_file.testzip():
@@ -84,8 +84,6 @@ def create_bookfile(file, original_filename):
     mimetype = detect_mime(file,original_filename)
     if mimetype == Mimetype.EPUB:
         return EPub(file, original_filename)
-    elif mimetype == Mimetype.FB2:
-        return FB2sax(file, original_filename) if config.SOPDS_FB2SAX else FB2(file, original_filename)
     elif mimetype == Mimetype.FB2_ZIP:
         return FB2Zip(file, original_filename)
     elif mimetype == Mimetype.MOBI:

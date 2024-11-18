@@ -4,7 +4,7 @@ class Mimetype:
     ZIP = 'application/zip'
 
     EPUB = 'application/epub+zip'
-    FB2 = 'application/fb2+zip'
+    FB2_ZIP = 'application/fb2+zip'
     PDF = 'application/pdf'
     MSWORD = 'application/msword'
     MOBI = 'application/x-mobipocket-ebook'
