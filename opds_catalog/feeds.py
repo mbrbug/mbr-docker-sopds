@@ -299,7 +299,7 @@ class CatalogsFeed(AuthFeed):
             mime = mime_detector.fmt(item['format'])
             enclosure = [opdsEnclosure(reverse("opds_catalog:download", kwargs={"book_id": item['id'], "zip_flag": 0}), mime, "http://opds-spec.org/acquisition/open-access"),]
             if not item['format'] in settings.NOZIP_FORMATS:
-                mimezip = Mimetype.FB2_ZIP if mime == Mimetype.FB2 else "%s+zip" % mime
+                mimezip = Mimetype.FB2_ZIP
                 enclosure += [opdsEnclosure(reverse("opds_catalog:download", kwargs={"book_id": item['id'], "zip_flag": 1}), mimezip, "http://opds-spec.org/acquisition/open-access")]
             enclosure += [opdsEnclosure(reverse("opds_catalog:cover", kwargs={"book_id": item['id']}), "image/jpeg","http://opds-spec.org/image"),
                           opdsEnclosure(reverse("opds_catalog:thumb", kwargs={"book_id": item['id']}), "image/jpeg","http://opds-spec.org/thumbnail"),
