@@ -23,7 +23,7 @@ RUN apk add git zsh mc curl openssh gcc musl-dev zlib-dev jpeg-dev freetype-dev 
 && git clone -b master https://github.com/mbrbug/mbr-docker-sopds.git sopds
 WORKDIR /sopds
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt \
-&& pip3 install mysqlclient
+&& pip3 install mysqlclient psycopg2
 # RUN pip3 install --upgrade pip && pip3 install -r requirements.txt && pip3 install mysqlclient
 RUN rm -rf /sopds/convert/fb2conv && mkdir -p /sopds/convert/fb2conv && cd /sopds/convert/fb2conv \
 && wget https://github.com/rupor-github/fb2mobi/releases/download/3.6.67/fb2mobi_cli_linux_x86_64_glibc_2.23.tar.xz \
